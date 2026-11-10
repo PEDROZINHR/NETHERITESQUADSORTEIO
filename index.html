@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#07110f" />
+  <title>NETHERITE SQUAD 2 — Sorteio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="snow" aria-hidden="true"></div>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <div class="brand-mark"><span class="brand-gem">◆</span><span>NS<span class="brand-two">2</span></span></div>
+    <div class="top-status"><span class="live-dot"></span> EVENTO ESPECIAL <b>•</b> NATAL & CAOS</div>
+    <div class="top-right">EDIÇÃO 2026 <span>✦</span></div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow"><span></span> O DESTINO SERÁ DECIDIDO AQUI <span></span></div>
+      <h1>NETHERITE <em>SQUAD</em> <span class="title-two">2</span></h1>
+      <div class="subtitle">SORTEIO OFICIAL <i>—</i> DUPLAS & BIOMAS</div>
+      <p class="hero-copy">Cinco duplas. Oito biomas. Uma única chance de dominar o caos.</p>
+      <div class="hero-line"><span>❄</span><span class="line"></span><span>⚔</span><span class="line"></span><span>❄</span></div>
+    </section>
+
+    <section class="control-strip">
+      <div class="control-copy">
+        <span class="control-kicker">PROTOCOLO DE SORTEIO</span>
+        <strong>Justo. Aleatório. Sem favoritismo.</strong>
+        <small>Os 10 nomes ficam separados: dois giros formam uma dupla, depois um giro define o bioma.</small>
+      </div>
+      <button id="startBtn" class="primary-btn"><span>✦</span> INICIAR SORTEIO</button>
+    </section>
+
+    <section class="wheels-grid">
+      <article class="wheel-panel">
+        <div class="panel-head">
+          <div><span class="panel-index">01 / EQUIPES</span><h2>ROLETA DAS DUPLAS</h2></div>
+          <span class="panel-icon">⚔</span>
+        </div>
+        <div class="wheel-wrap">
+          <div class="pointer pointer-red"></div>
+          <canvas id="pairWheel" width="600" height="600" aria-label="Roleta das duplas"></canvas>
+          <div class="wheel-center"><span>NS</span><small>2</small></div>
+        </div>
+        <div class="wheel-caption"><span class="tiny-snow">❄</span> GIRE DUAS VEZES PARA FORMAR A DUPLA <span class="tiny-snow">❄</span></div>
+        <button id="spinPairBtn" class="spin-btn" disabled><span>GIRAR ROLETA</span><b>↻</b></button>
+        <div class="wheel-count" id="pairCount">10 PARTICIPANTES RESTANTES</div>
+      </article>
+
+      <article class="wheel-panel biome-panel">
+        <div class="panel-head">
+          <div><span class="panel-index">02 / TERRITÓRIOS</span><h2>ROLETA DOS BIOMAS</h2></div>
+          <span class="panel-icon">❄</span>
+        </div>
+        <div class="wheel-wrap">
+          <div class="pointer pointer-gold"></div>
+          <canvas id="biomeWheel" width="600" height="600" aria-label="Roleta dos biomas"></canvas>
+          <div class="wheel-center biome-center"><span>BIOMA</span><small>?</small></div>
+        </div>
+        <div class="wheel-caption"><span class="tiny-snow">✦</span> ONDE A JORNADA VAI COMEÇAR? <span class="tiny-snow">✦</span></div>
+        <button id="spinBiomeBtn" class="spin-btn gold-btn" disabled><span>GIRAR ROLETA</span><b>↻</b></button>
+        <div class="wheel-count" id="biomeCount">8 BIOMAS RESTANTES</div>
+      </article>
+    </section>
+
+    <section class="reveal-panel">
+      <div class="reveal-heading">
+        <div><span class="panel-index">03 / DESTINO</span><h2>RESULTADOS DO EVENTO</h2></div>
+        <span class="chaos-tag">✦ CAOS CONTROLADO ✦</span>
+      </div>
+      <div id="waitingState" class="waiting-state">
+        <div class="waiting-symbol">❄</div>
+        <strong>O sorteio ainda não começou</strong>
+        <span>Inicie o protocolo para liberar as roletas.</span>
+      </div>
+      <div id="resultsGrid" class="results-grid"></div>
+      <div class="results-footer"><span id="progressText">AGUARDANDO INÍCIO</span><span>✦ NETHERITE SQUAD 2 ✦</span></div>
+    </section>
+
+    <section class="fairness">
+      <div class="fairness-icon">⚖</div>
+      <div><strong>TRANSPARÊNCIA DO SORTEIO</strong><p>O sorteio usa o gerador criptográfico do navegador (<code>crypto.getRandomValues</code>) com rejeição de valores enviesados. Cada dupla e cada bioma só pode sair uma vez. O código fica aberto para qualquer participante conferir.</p></div>
+      <button id="showRulesBtn" class="text-btn">COMO FUNCIONA +</button>
+    </section>
+    <div id="rules" class="rules hidden">
+      <p><b>1.</b> Os 10 participantes são embaralhados individualmente. Cada nome é sorteado em um giro e removido da roleta; o segundo giro completa a dupla.</p>
+      <p><b>2.</b> Depois dos dois nomes, um giro separado escolhe o bioma da dupla. Os nomes e biomas sorteados são removidos das respectivas roletas.</p>
+      <p><b>3.</b> Os 8 biomas entram uma única vez. Como são 5 duplas, 3 biomas ficarão de fora.</p>
+      <p><b>4.</b> Não existe botão para escolher um resultado específico. Para recomeçar, o sorteio inteiro é reiniciado.</p>
+    </div>
+    <footer>FEITO PARA UMA NOITE LENDÁRIA <span>❄</span> BOA SORTE, SQUAD.</footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
